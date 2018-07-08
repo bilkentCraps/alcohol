@@ -17,7 +17,7 @@ $(document).ready(function() {
       rows = tbl.getElementsByTagName("tr");
       for (var i = 0; i < (rows.length - 1); i++) {
         shouldSwitch = false;
-        if (parseInt(rows[i].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[i + 1].getElementsByTagName("td")[0].innerHTML)) {
+        if (parseFloat(rows[i].getElementsByTagName("td")[0].innerHTML) > parseFloat(rows[i + 1].getElementsByTagName("td")[0].innerHTML)) {
           shouldSwitch = true;
           break;
         }
