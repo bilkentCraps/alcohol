@@ -1,0 +1,66 @@
+<!DOCTYPE html><html><head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alcoholist</title></head><body>
+<div align="center"><textarea class="form-control" rows="5"></textarea><table class="table" id="t"></table></div>
+<script>
+
+$(document).ready(function() {
+
+  function sortTable() {
+    var tbl = document.getElementById("t");
+    var rows, shouldSwitch;
+    var switching = true;
+    while (switching) {
+      switching = false;
+      rows = tbl.getElementsByTagName("tr");
+      for (var i = 0; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        if (parseInt(rows[i].getElementsByTagName("td")[0].innerHTML) > parseInt(rows[i + 1].getElementsByTagName("td")[0].innerHTML)) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
+
+  $("textarea").bind('input propertychange', function() {
+
+    var table = document.getElementById("t");
+
+    var es = $("textarea").val().split("\n");
+
+    if (es.length == 5) {
+
+      var row = table.insertRow(0);
+
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      var cell3 = row.insertCell(2);
+      var cell4 = row.insertCell(3);
+      var cell5 = row.insertCell(4);
+      var cell6 = row.insertCell(5);
+
+      cell1.innerHTML = es[3] / (es[1] * es[2] / 100);
+      cell2.innerHTML = es[0];
+      cell3.innerHTML = es[1] + " cl";
+      cell4.innerHTML = es[2] + " %";
+      cell5.innerHTML = es[3] + " tl";
+      cell6.innerHTML = "<button onclick=\"document.getElementById('t').deleteRow(this.parentNode.parentNode.rowIndex)\">x</button>";
+
+      $("textarea").val("");
+
+      sortTable();
+
+    }
+
+  });
+
+});
+
+</script></body></html>
